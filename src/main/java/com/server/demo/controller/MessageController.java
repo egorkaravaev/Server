@@ -22,12 +22,17 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class MessageController {
 
-    private static final int LOGIN_IN = 1111;
+    private static final int SIGN_IN = 1111;
+    private static final int GET_RESOURCES = 1121;
+    private static final int GET_ALL_CHARACTERS = 1131;
+    private static final int GET_BUILDING_INFO = 1141;
+    private static final int GET_PLAYER_CHARACTER = 1151;
     private static final int COMPANY_MISSION_INFO = 1112;
     private static final int MISSION_BATTLE_INFO = 1114;
 
@@ -53,9 +58,21 @@ public class MessageController {
     }
 
     private void handleMessageType(int type, String message){
+        Player player = null;
         switch (type) {
-            case LOGIN_IN:
-                Player player = gson.fromJson(message, Player.class);
+            case SIGN_IN:
+                player = gson.fromJson(message, Player.class);
+                loginPlayer(player);
+                break;
+            case GET_RESOURCES:
+                Resources resources = gson.fromJson(message, Resources.class);
+                receiveResources(resources);
+                break;
+            case GET_ALL_CHARACTERS:
+                getAllCharacters();
+                break;
+            case GET_PLAYER_CHARACTER:
+                player = gson.fromJson(message, Player.class);
                 receivePlayer(player);
                 break;
             case COMPANY_MISSION_INFO:
@@ -68,6 +85,19 @@ public class MessageController {
                 break;
         }
     }
+
+    private void loginPlayer(Player player) {
+        Player newPlayer = (Player) playerService.getPlayer(player.getId());
+        System.out.println(1);
+    }
+
+    private void receiveResources(Resources resources) {
+    }
+
+    private void getAllCharacters() {
+    }
+
+
 
     private void receiveMissionInfo(MissionBattleInfo missionBattleInfo) {
         missionService.setType(missionBattleInfo.getId(), "missionBattleInfo");
@@ -264,20 +294,28 @@ public class MessageController {
     }
 
     private ArrayList<Long> generateRandomCharactersId() {
-        ArrayList<Long> randomNumbers = new ArrayList<>();
-        while (randomNumbers.size() < 5){
+        ArrayList<Long> charactersIds = new ArrayList<>(Arrays.asList(2L, 3L, 5L, 7L, 30L, 31L, 34L));
+        ArrayList<Long> fiveCharacterIds= new ArrayList<>();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        while (indexes.size() < 5){
             boolean isExist = false;
-            long randomNumber = 1 + (int) (Math.random() * 8);
-            for (Long number : randomNumbers) {
-                if (number == randomNumber) {
+            int randomIndex = (int) (Math.random() * 7);
+            for (int index : indexes) {
+                if (index == randomIndex) {
                     isExist = true;
                 }
             }
             if (!isExist) {
-                randomNumbers.add(randomNumber);
+                indexes.add(randomIndex);
             }
         }
-        return randomNumbers;
+
+        for (int index : indexes) {
+            fiveCharacterIds.add(charactersIds.get(index));
+        }
+
+        return fiveCharacterIds;
     }
 
     private void sendToServer(Message message) {

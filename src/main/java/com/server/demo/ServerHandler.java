@@ -16,26 +16,23 @@ import java.util.logging.Logger;
 public class ServerHandler extends BinaryWebSocketHandler{
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private WebSocketSession session;
 
     @Autowired
     MessageController messageController;
 
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info(String.format("Connection was opened with server : %s! ", session.getId()));
-        this.session = session;
     }
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        logger.info("Message from client: " + message.getPayload());
-        CharBuffer charBuffer = StandardCharsets.UTF_8.decode((ByteBuffer) message.getPayload());
-        logger.info(charBuffer.toString());
-        messageController.handleMessage(charBuffer.toString(), session);
+//        logger.info("Message from client: " + message.getPayload());
+//        CharBuffer charBuffer = StandardCharsets.UTF_8.decode((ByteBuffer) message.getPayload());
+//        logger.info(charBuffer.toString());
+//        messageController.handleMessage(charBuffer.toString(), session);
 
-        //messageController.handleMessage((String) message.getPayload(), session);
+        messageController.handleMessage((String) message.getPayload(), session);
     }
 
     @Override
