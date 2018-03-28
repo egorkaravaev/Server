@@ -1,7 +1,6 @@
 package com.server.demo.entity.playerCharacter;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+import com.server.demo.entity.Character;
 
 import javax.persistence.*;
 import java.io.Serializable;

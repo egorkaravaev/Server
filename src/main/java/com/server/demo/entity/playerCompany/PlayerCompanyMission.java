@@ -1,9 +1,5 @@
 package com.server.demo.entity.playerCompany;
 
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -24,7 +20,7 @@ public class PlayerCompanyMission implements Serializable {
 
     @javax.persistence.Id
     @ManyToOne
-    @JoinColumn(name = "m_id", referencedColumnName = "pk_mission_id")
+    @JoinColumn(name = "mis_id", referencedColumnName = "pk_mission_id")
     private Mission mission;
 
     private int progress;

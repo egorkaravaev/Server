@@ -1,6 +1,6 @@
 package com.server.demo.service;
 
-import com.server.demo.entity.playerCharacter.Character;
+import com.server.demo.entity.Character;
 import com.server.demo.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

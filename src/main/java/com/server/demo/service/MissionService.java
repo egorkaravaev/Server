@@ -1,5 +1,6 @@
 package com.server.demo.service;
 
+import com.server.demo.entity.AbstractMission;
 import com.server.demo.entity.playerCompany.Mission;
 import com.server.demo.repository.MissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,12 @@ public class MissionService {
     MissionRepository missionRepository;
 
     @Transactional
-    public Mission getMission(Long id){
+    public AbstractMission getMission(Long id){
         return missionRepository.findById(id).get();
+    }
+
+    @Transactional
+    public void setType(Long id, String type) {
+        missionRepository.setType(id, type);
     }
 }

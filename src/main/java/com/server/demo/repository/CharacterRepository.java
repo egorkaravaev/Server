@@ -1,6 +1,6 @@
 package com.server.demo.repository;
 
-import com.server.demo.entity.playerCharacter.Character;
+import com.server.demo.entity.Character;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,13 @@
 package com.server.demo.message;
 
+import com.server.demo.enums.MessageType;
+
 import java.io.Serializable;
 
 public class Message implements IMessage, Serializable{
 
     private int type;
+    //private MessageType type;
     private String message;
 
     public Message(int type, String obj) {
@@ -15,7 +18,15 @@ public class Message implements IMessage, Serializable{
     public Message() {
     }
 
-    public int getType() {
+//    public MessageType getType() {
+//        return type;
+//    }
+//
+//    public void setType(MessageType type) {
+//        this.type = type;
+//    }
+
+        public int getType() {
         return type;
     }
 
