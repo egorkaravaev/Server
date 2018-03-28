@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 @RestController
 public class Controller {
 
-    Logger logger = (Logger) LoggerFactory.getLogger(Controller.class);
+    //Logger logger = (Logger) LoggerFactory.getLogger(Controller.class);
 
-    @GetMapping("/")
+    @GetMapping("/test")
     public String hello(){
-        logger.info("hello");
+        //logger.info("hello");
         return "hello";
     }
 }
